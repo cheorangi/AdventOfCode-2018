@@ -1,5 +1,7 @@
-frequency = 0
+#supply the input as a txt file for this to work.
+with open('day1p1-input.txt') as inFile:
+    puzzle = inFile.read().splitlines()
 
-for i in range(len(l)):
-    frequency += int(i)
-
+frequencies = [int(i) for i in puzzle]
+print(frequencies)
+print(sum(frequencies))
