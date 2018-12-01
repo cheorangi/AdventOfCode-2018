@@ -1,4 +1,3 @@
 {
-    "python.linting.pylintEnabled": false,
     "python.pythonPath": "/home/linuxbrew/.linuxbrew/bin/python3"
 }
