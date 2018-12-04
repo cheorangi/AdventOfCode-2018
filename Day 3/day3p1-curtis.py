@@ -7,7 +7,6 @@ with open('day3p1-curtis-input.txt') as infile:
 
 fabric = (1000,1000)
 
-<<<<<<< HEAD
 #create a few helper classes to make the code easier to read rather than using lists for all the items in the claim
 class Point():
     def __init__(self, x=0, y=0):
@@ -38,8 +37,6 @@ claim = Claim(1, rect)
 print(claim.id)
 print(claim.rect.Point.x)
 
-=======
->>>>>>> 066fe6e15a890d03db9d38c9c8c73e5d5f94d1f7
 def splitClaim(c):
     _id = c.split(' ')[0][-1]
     _coord = c.split(' ')[2][:-1].split(',')
