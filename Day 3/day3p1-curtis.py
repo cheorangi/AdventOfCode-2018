@@ -1,9 +1,9 @@
 #getting started on day 3 this one is gonna be a doozy
 from math import sqrt
 
-claims = ['#1 @ 1,3: 4x4', '#2 @ 3,1: 4x4', '#3 @ 5,5: 2x2']
-'''with open('day3p1-curtis-input.txt') as infile:
-    claims = infile.read().splitlines()'''
+#claims = ['#1 @ 1,3: 4x4', '#2 @ 3,1: 4x4', '#3 @ 5,5: 2x2']
+with open('day3p1-curtis-input.txt') as infile:
+    claims = infile.read().splitlines()
 
 fabric = (1000,1000)
 
@@ -64,17 +64,17 @@ def calcOverlap(c1, c2):
 
     a1 = abs(int(c1.rect.point.x) - (int(c1.rect.point.x) + int(c1.rect.width))) * abs(int(c1.rect.point.y) - (int(c1.rect.point.y) + int(c1.rect.height)))
 
-    print(a1)
+    #print(a1)
 
     a2 = abs(int(c2.rect.point.x) - (int(c2.rect.point.x) + int(c2.rect.width))) * abs(int(c2.rect.point.y) - (int(c2.rect.point.y) + int(c2.rect.height)))
 
-    print(a2)
+    #print(a2)
 
     #aI = (min((int(c1.rect.point.x) + int(c1.rect.width)), (int(c2.rect.point.x) + int(c2.rect.width))) - max(int(c1.rect.point.x), (int(c1.rect.point.x) + int(c1.rect.width)))) * (min((int(c1.rect.point.y) + int(c1.rect.height)), (int(c2.rect.point.y) + int(c2.rect.height))) - max(int(c1.rect.point.y), (int(c1.rect.point.y) + int(c1.rect.height))))
     aI = (min(int(c1.rect.point.x) + int(c1.rect.width), int(c2.rect.point.x) + int(c2.rect.width)) - max(int(c1.rect.point.x), int(c2.rect.point.x))) * (min(int(c1.rect.point.y) + int(c1.rect.height), int(c2.rect.point.y) + int(c2.rect.height)) - max(int(c1.rect.point.y), int(c2.rect.point.y)))
-    print(aI)
+    #print(aI)
 
-    return ((a1 + a2) - aI)
+    return (aI)
 
 totalOverlap = 0
 for i in range(len(claims)-1):
@@ -87,4 +87,4 @@ for i in range(len(claims)-1):
         else:
             print('No Claims Overlap')
 
-print(totalOverlap)
+print(sqrt(totalOverlap))
