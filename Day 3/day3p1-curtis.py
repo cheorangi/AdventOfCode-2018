@@ -24,24 +24,17 @@ class Claim():
         self.id = id_
         self.rect = rect
 
-point = Point(1, 2)
-
-print(point.x)
-
-rect = Rectangle(point, 4, 4)
-
-print(rect.width)
-
-claim = Claim(1, rect)
-
-print(claim.id)
-print(claim.rect.Point.x)
-
 def splitClaim(c):
     _id = c.split(' ')[0][-1]
     _coord = c.split(' ')[2][:-1].split(',')
     _size = c.split(' ')[3].split('x')
     return _id, _coord, _size
+
+def createClaims(c):
+    _id, _point, _size = splitClaim(c)
+    rect = Rectangle(_size[0], _size[1])
+    point = Point(_point[0], _point[1])
+    claim  = Claim(_id, point, rect)
 
 
 def checkOverlap(c1, c2):
@@ -72,6 +65,8 @@ def calcOverlap(c1, c2):
 totalOverlap = 0
 for i in range(len(claims)-1):
     for j in range(i+1, len(claims)):
+        claim1 = createClaims(claims[i]) #user helper classes to create a claim object for ease of use and readability
+        claim2 = createClaims(claims[j]) #user helper classes to create a claim object for ease of use and readability
         if (checkOverlap(claims[i], claims[j])):
             print('Claims overlap')
             totalOverlap += calcOverlap(claims[i], claims[j])
