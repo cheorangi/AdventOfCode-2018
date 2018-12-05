@@ -61,16 +61,20 @@ def checkOverlap(c1, c2):
     return True
 
 def calcOverlap(c1, c2):
-    c1Id, c1Coord, c1Size = splitClaim(c1)
-    c2Id, c2Coord, c2Size = splitClaim(c2)
 
-    a1 = abs(int(c1Coord[0]) - int(c1Coord[0]) + int(c1Size[0])) * abs(int(c1Coord[1]) - int(c1Coord[1]) + int(c1Size[1]))
+    a1 = abs(int(c1.rect.point.x) - (int(c1.rect.point.x) + int(c1.rect.width))) * abs(int(c1.rect.point.y) - (int(c1.rect.point.y) + int(c1.rect.height)))
 
-    a2 = abs(int(c2Coord[0]) - int(c2Coord[0]) + int(c2Size[0])) * abs(int(c2Coord[1]) - int(c2Coord[1]) + int(c2Size[1]))
+    print(a1)
 
-    aI = (min(int(c1Coord[0]) + int(c1Size[0]), int(c2Coord[0]) + int(c2Size[0])) - max(int(c1Coord[0]), int(c1Coord[0]) + int(c1Size[0]))) * (min(int(c1Coord[1]) + int(c1Size[1]), int(c2Coord[1]) + int(c2Size[1])) - max(int(c1Coord[1]), int(c1Coord[1]) + int(c1Size[1])))
+    a2 = abs(int(c2.rect.point.x) - (int(c2.rect.point.x) + int(c2.rect.width))) * abs(int(c2.rect.point.y) - (int(c2.rect.point.y) + int(c2.rect.height)))
 
-    return (a1 + a2 - aI)
+    print(a2)
+
+    #aI = (min((int(c1.rect.point.x) + int(c1.rect.width)), (int(c2.rect.point.x) + int(c2.rect.width))) - max(int(c1.rect.point.x), (int(c1.rect.point.x) + int(c1.rect.width)))) * (min((int(c1.rect.point.y) + int(c1.rect.height)), (int(c2.rect.point.y) + int(c2.rect.height))) - max(int(c1.rect.point.y), (int(c1.rect.point.y) + int(c1.rect.height))))
+    aI = (min(int(c1.rect.point.x) + int(c1.rect.width), int(c2.rect.point.x) + int(c2.rect.width)) - max(int(c1.rect.point.x), int(c2.rect.point.x))) * (min(int(c1.rect.point.y) + int(c1.rect.height), int(c2.rect.point.y) + int(c2.rect.height)) - max(int(c1.rect.point.y), int(c2.rect.point.y)))
+    print(aI)
+
+    return ((a1 + a2) - aI)
 
 totalOverlap = 0
 for i in range(len(claims)-1):
@@ -79,7 +83,7 @@ for i in range(len(claims)-1):
         claim2 = createClaims(claims[j]) #user helper classes to create a claim object for ease of use and readability
         if claim1.overlap(claim2):
             print('Claims overlap')
-            totalOverlap += calcOverlap(claims[i], claims[j])
+            totalOverlap += calcOverlap(claim1, claim2)
         else:
             print('No Claims Overlap')
 
