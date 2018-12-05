@@ -1,9 +1,9 @@
 #getting started on day 3 this one is gonna be a doozy
 from math import sqrt
 
-#claims = ['#1 @ 1,3: 4x4', '#2 @ 3,1: 4x4', '#3 @ 5,5: 2x2']
-with open('day3p1-curtis-input.txt') as infile:
-    claims = infile.read().splitlines()
+claims = ['#1 @ 1,3: 4x4', '#2 @ 3,1: 4x4', '#3 @ 5,5: 2x2']
+'''with open('day3p1-curtis-input.txt') as infile:
+    claims = infile.read().splitlines()'''
 
 fabric = (1000,1000)
 
@@ -15,7 +15,7 @@ class Point():
 
 class Rectangle():
     def __init__(self, coord, width=0, height=0):
-        self.Point = coord
+        self.point = coord
         self.width = width
         self.height = height
 
@@ -23,6 +23,15 @@ class Claim():
     def __init__(self, id_, rect):
         self.id = id_
         self.rect = rect
+
+    def overlap(self, other):
+        if self.rect.point.x > other.rect.point.x + other.rect.width or self.rect.point.x + self.rect.width > other.rect.point.x:
+            return False
+        
+        if self.rect.point.y < other.rect.point.y + other.rect.height or self.rect.point.y + self.rect.height < other.rect.point.y:
+            return False
+        
+        return True
 
 def splitClaim(c):
     _id = c.split(' ')[0][-1]
@@ -32,9 +41,10 @@ def splitClaim(c):
 
 def createClaims(c):
     _id, _point, _size = splitClaim(c)
-    rect = Rectangle(_size[0], _size[1])
     point = Point(_point[0], _point[1])
-    claim  = Claim(_id, point, rect)
+    rect = Rectangle(point, _size[0], _size[1])
+    claim  = Claim(_id, rect)
+    return claim
 
 
 def checkOverlap(c1, c2):
@@ -67,7 +77,7 @@ for i in range(len(claims)-1):
     for j in range(i+1, len(claims)):
         claim1 = createClaims(claims[i]) #user helper classes to create a claim object for ease of use and readability
         claim2 = createClaims(claims[j]) #user helper classes to create a claim object for ease of use and readability
-        if (checkOverlap(claims[i], claims[j])):
+        if claim1.overlap(claim2):
             print('Claims overlap')
             totalOverlap += calcOverlap(claims[i], claims[j])
         else:
