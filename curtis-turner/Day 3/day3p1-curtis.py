@@ -26,7 +26,7 @@ class Claim():
 
     def overlap(self, other):
         #check if second rectangle x coordinate is to the right of the first rectanlge x coordinate and visa versa
-        if self.rect.point.x < other.rect.point.x and self.rect.point.x + self.rect.width > other.rect.point.x and self.rect.point.y < other.rect.point.y and self.rect.point.y + self.rect.height > other.rect.point.y:
+        if self.rect.point.x + self.rect.width < other.rect.point.x or other.rect.point.x + other.rect.width > self.rect.point.x or self.rect.point.y + self.rect.height > other.rect.point.y or other.rect.point.y + other.rect.height > self.rect.point.y:
             return False
         
         #if self.rect.point.y < other.rect.point.y + other.rect.height or self.rect.point.y + self.rect.height < other.rect.point.y:
