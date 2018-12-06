@@ -25,6 +25,7 @@ class Claim():
         self.rect = rect
 
     def overlap(self, other):
+        #check if second rectangle x coordinate is to the right of the first rectanlge x coordinate and visa versa
         if self.rect.point.x > other.rect.point.x + other.rect.width or self.rect.point.x + self.rect.width > other.rect.point.x:
             return False
         
@@ -47,18 +48,20 @@ def createClaims(c):
     return claim
 
 
+'''Comment out the checkoverlap function
 def checkOverlap(c1, c2):
     c1Id, c1Coord, c1Size = splitClaim(c1)
     c2Id, c2Coord, c2Size = splitClaim(c2)
 
     #if any part of the rectangle is between the left x and right side x
-    if c1Coord[0] > c2Coord[0] + c2Size[0] or c1Coord[0] + c1Size[0] > c2Coord[0]:
+    if c2Coord[0] > c2Coord[0] + c2Size[0] or c1Coord[0] + c1Size[0] > c2Coord[0]:
         return False
     
     if c1Coord[1] < c2Coord[1] + c2Size[1] or c1Coord[1] + c1Size[1] < c2Coord[1]:
         return False
 
     return True
+'''
 
 def calcOverlap(c1, c2):
 
@@ -87,4 +90,4 @@ for i in range(len(claims)-1):
         else:
             print('No Claims Overlap')
 
-print(sqrt(totalOverlap))
+print(totalOverlap)
