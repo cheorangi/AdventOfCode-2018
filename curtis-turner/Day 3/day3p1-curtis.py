@@ -47,22 +47,6 @@ def createClaims(c):
     claim  = Claim(_id, rect)
     return claim
 
-
-'''Comment out the checkoverlap function
-def checkOverlap(c1, c2):
-    c1Id, c1Coord, c1Size = splitClaim(c1)
-    c2Id, c2Coord, c2Size = splitClaim(c2)
-
-    #if any part of the rectangle is between the left x and right side x
-    if c2Coord[0] > c2Coord[0] + c2Size[0] or c1Coord[0] + c1Size[0] > c2Coord[0]:
-        return False
-    
-    if c1Coord[1] < c2Coord[1] + c2Size[1] or c1Coord[1] + c1Size[1] < c2Coord[1]:
-        return False
-
-    return True
-'''
-
 def calcOverlap(c1, c2):
 
     a1 = abs(int(c1.rect.point.x) - (int(c1.rect.point.x) + int(c1.rect.width))) * abs(int(c1.rect.point.y) - (int(c1.rect.point.y) + int(c1.rect.height)))
