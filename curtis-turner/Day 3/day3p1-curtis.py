@@ -1,9 +1,9 @@
 #getting started on day 3 this one is gonna be a doozy
 from math import sqrt
 
-claims = ['#1 @ 1,3: 4x4', '#2 @ 3,1: 4x4', '#3 @ 5,5: 2x2']
-#with open('day3p1-curtis-input.txt') as infile:
-    #claims = infile.read().splitlines()
+#claims = ['#1 @ 1,3: 4x4', '#2 @ 3,1: 4x4', '#3 @ 5,5: 2x2']
+with open('day3p1-curtis-input.txt') as infile:
+    claims = infile.read().splitlines()
 
 fabric = (1000,1000)
 
@@ -38,7 +38,7 @@ class Claim():
         return True
 
 def splitClaim(c):
-    _id = c.split(' ')[0][-1]
+    _id = c.split(' ')[0][1:]
     _coord = c.split(' ')[2][:-1].split(',')
     _size = c.split(' ')[3].split('x')
     return _id, _coord, _size
@@ -61,14 +61,21 @@ def calcOverlap(c1, c2):
     return (aI)
 
 totalOverlap = 0
-for i in range(len(claims)-1):
+for i in range(len(claims)):
     for j in range(i+1, len(claims)):
         claim1 = createClaims(claims[i]) #user helper classes to create a claim object for ease of use and readability
         claim2 = createClaims(claims[j]) #user helper classes to create a claim object for ease of use and readability
-        if claim1.overlap(claim2):
-            print('Claims overlap')
+        print('Comparing Claims >> ' + claim1.id + ' and ' + claim2.id)
+        if calcOverlap(claim1, claim2) > 0:
+            print('Claims Overlap')
             totalOverlap += calcOverlap(claim1, claim2)
         else:
             print('No Claims Overlap')
 
 print(totalOverlap)
+
+'''
+if claim1.overlap(claim2):
+    print('Claims overlap')
+    totalOverlap += calcOverlap(claim1, claim2)
+'''
