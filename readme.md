@@ -5,7 +5,7 @@
 
 ## A few house keeping rules
 1. Put your code into a Folder with your name or github username so we can tell who's stuff is where.
-2. Please add SPOILER_ALERT to any solutions
+2. Please add SPOILER-ALERT to any solutions
 3. If you have any questions feel free to ask.
 
 Hopeful this way we can all see how each of us did it and can help work on them if need be
