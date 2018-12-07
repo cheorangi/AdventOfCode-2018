@@ -12,18 +12,14 @@ seen = set()
 seen.add(currFreq)
 
 cont = True
-index = 0
 
 while cont:
-    if index > len(frequencies)-1:
-        index = 0
+    for i in frequencies:
+        currFreq += i
 
-    currFreq += frequencies[index]
+        if currFreq in seen:
+            print(currFreq)
+            cont = False
+            break
 
-    if currFreq in seen:
-        print(currFreq)
-        break
-
-    seen.add(currFreq)
-
-    index += 1
+        seen.add(currFreq)

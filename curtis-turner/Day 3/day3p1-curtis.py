@@ -1,11 +1,17 @@
 #getting started on day 3 this one is gonna be a doozy
 from math import sqrt
+import re
 
 #claims = ['#1 @ 1,3: 4x4', '#2 @ 3,1: 4x4', '#3 @ 5,5: 2x2']
 with open('day3p1-curtis-input.txt') as infile:
-    claims = infile.read().splitlines()
+    claims = []
+    for r in infile.readlines():
+        r = re.split('[^0-9]+', r[1:].strip())
+        claims.append([int(d) for d in r])
 
-fabric = (1000,1000)
+print(claims)
+
+'''fabric = (1000,1000)
 
 #create a few helper classes to make the code easier to read rather than using lists for all the items in the claim
 class Point():
@@ -74,7 +80,7 @@ for i in range(len(claims)):
 
 print(totalOverlap)
 
-'''
+
 if claim1.overlap(claim2):
     print('Claims overlap')
     totalOverlap += calcOverlap(claim1, claim2)
