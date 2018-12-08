@@ -7,16 +7,24 @@ with open('day4p1-curtis-input.txt') as infile:
 
 newdata =[]
 for i in range(len(data)):
-    temp = []
+    temp = ''
     string = data[i]
     timestamp = string.split(' ')[0] + ' ' + string.split(' ')[1]
     timestamp = timestamp[1:-1]
     timestap = datetime.datetime.strptime(timestamp, '%Y-%m-%d %H:%M')
-    temp.append(timestamp)
-    temp +=  ' ' + data[i]
+    temp += timestamp + ' ' + data[i]
     newdata.append(temp)
 
 print(newdata[0])
+
+newdata.sort(key = lambda x : x.split(' ')[0])
+
+print(newdata[0])
+
+with open('check-data.txt', 'w') as outfile:
+    for i in newdata:
+        outfile.write(i + '\n')
+
 
 '''
 Notes in the Comment
