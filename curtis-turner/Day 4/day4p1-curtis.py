@@ -21,12 +21,19 @@ newdata.sort(key = lambda x : x.split(' ')[0])
 
 print(newdata[0])
 
-with open('check-data.txt', 'w') as outfile:
+gaurds = {}
+
+for i in newdata:
+    gaurdNum = i.split(' ')[2]
+    if gaurdNum not in gaurds:
+        gaurds[gaurdNum] = 0
+    else:
+        gaurds[gaurdNum] += timedelta
+
+'''with open('check-data.txt', 'w') as outfile:
     for i in newdata:
         outfile.write(i + '\n')
 
-
-'''
 Notes in the Comment
 addtime = map(lambda l : l[0].split(' ')[0] + ' ' + l[0].split(' ')[1], data)
 print(list(addtime))
