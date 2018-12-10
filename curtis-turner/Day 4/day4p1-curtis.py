@@ -28,15 +28,16 @@ print(newdata[0])
 
 gaurds = []
 
-#track the guard IDs and then track the minutes that they are asleep
-#if gaurdID array of gaurds 
+def countOfMinutesAwake(id, data):
+    pass
+
+
 for i in newdata:
-    if 'Gaurd' in i.split(' '):
-        gaurdNum = i.split(' ')[2]
-        if gaurdNum not in gaurds:
-            gaurds[gaurdNum] = 0
-        else:
-            gaurds[gaurdNum] += 
+    gaurdNum = i.split(' ')[2]
+    if gaurdNum not in gaurds:
+        gaurds[gaurdNum] = 0
+    else:
+        gaurds[gaurdNum] += countOfMinutesAwake(gaurdNum, newdata)
 
 '''with open('check-data.txt', 'w') as outfile:
     for i in newdata:
