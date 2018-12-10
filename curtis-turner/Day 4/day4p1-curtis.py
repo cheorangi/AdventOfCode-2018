@@ -7,7 +7,7 @@ class Guard():
         self.minutes = minutes
 
 #setting up my file for day 4 if i every get there lol
-with open('example-input.txt') as infile:
+with open('day4p1-curtis-input.txt') as infile:
     data = infile.read().splitlines()
 
 newdata =[]
@@ -20,26 +20,38 @@ for i in range(len(data)):
     temp += timestamp + ' ' + data[i]
     newdata.append(temp)
 
-print(newdata[0])
+#print(newdata[0])
 
-newdata.sort(key = lambda x : x.split(' ')[0])
+newdata.sort(key = lambda x : x.split(' ')[0] + ' ' + x.split(' ')[1])
 
-print(newdata[0])
+with open('check-data-2.txt', 'w') as outfile:
+    for i in newdata:
+        outfile.write(i + '\n')
 
-gaurds = []
+#print(newdata)
+
+'''gaurds = [{'date': '11-01', 'id': '#123' , 'minutes': 0}]
 
 def countOfMinutesAwake(id, data):
-    pass
+    totalMinutesAwake = 0
+    for i in data:
+        if id in i:
+            print('Id is in this line of the data...')
+    
+    return totalMinutesAwake
 
 
 for i in newdata:
-    gaurdNum = i.split(' ')[2]
-    if gaurdNum not in gaurds:
-        gaurds[gaurdNum] = 0
-    else:
-        gaurds[gaurdNum] += countOfMinutesAwake(gaurdNum, newdata)
+    print(i)
+    if 'Gaurd' in i:
+        gaurdNum = i.split(' ')[2]
+        print(gaurdNum)
+        if gaurdNum not in gaurds:
+            gaurds[gaurdNum] = 0
+        else:
+            gaurds[gaurdNum] = countOfMinutesAwake(gaurdNum, newdata)
 
-'''with open('check-data.txt', 'w') as outfile:
+with open('check-data.txt', 'w') as outfile:
     for i in newdata:
         outfile.write(i + '\n')
 
