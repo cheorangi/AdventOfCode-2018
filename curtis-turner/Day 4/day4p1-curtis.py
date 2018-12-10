@@ -1,6 +1,11 @@
 import datetime
 import re
 
+class Guard():
+    def __init__(self, id, minutes):
+        self.id = id
+        self.minutes = minutes
+
 #setting up my file for day 4 if i every get there lol
 with open('day4p1-curtis-input.txt') as infile:
     data = infile.read().splitlines()
@@ -21,8 +26,9 @@ newdata.sort(key = lambda x : x.split(' ')[0])
 
 print(newdata[0])
 
-gaurds = {}
+gaurds = []
 
+<<<<<<< HEAD
 def countOfMinutesAwake(id, data):
     pass
 
@@ -33,6 +39,17 @@ for i in newdata:
         gaurds[gaurdNum] = 0
     else:
         gaurds[gaurdNum] += countOfMinutesAwake(guardNum, newdata)
+=======
+#track the guard IDs and then track the minutes that they are asleep
+#if gaurdID array of gaurds 
+for i in newdata:
+    if 'Gaurd' in i.split(' '):
+        gaurdNum = i.split(' ')[2]
+        if gaurdNum not in gaurds:
+            gaurds[gaurdNum] = 0
+        else:
+            gaurds[gaurdNum] += 
+>>>>>>> b6ecfa369fa1971c722160d70c67fe0a9b7aa1fb
 
 '''with open('check-data.txt', 'w') as outfile:
     for i in newdata:
