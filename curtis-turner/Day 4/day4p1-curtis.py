@@ -23,12 +23,16 @@ print(newdata[0])
 
 gaurds = {}
 
+def countOfMinutesAwake(id, data):
+    pass
+
+
 for i in newdata:
     gaurdNum = i.split(' ')[2]
     if gaurdNum not in gaurds:
         gaurds[gaurdNum] = 0
     else:
-        gaurds[gaurdNum] += timedelta
+        gaurds[gaurdNum] += countOfMinutesAwake(guardNum, newdata)
 
 '''with open('check-data.txt', 'w') as outfile:
     for i in newdata:
