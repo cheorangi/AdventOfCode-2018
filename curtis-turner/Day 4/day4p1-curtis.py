@@ -37,7 +37,7 @@ for i in newdata:
     if gaurdNum not in gaurds:
         gaurds[gaurdNum] = 0
     else:
-        gaurds[gaurdNum] += countOfMinutesAwake(guardNum, newdata)
+        gaurds[gaurdNum] += countOfMinutesAwake(gaurdNum, newdata)
 
 '''with open('check-data.txt', 'w') as outfile:
     for i in newdata:
