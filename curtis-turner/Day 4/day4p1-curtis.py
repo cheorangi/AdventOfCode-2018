@@ -7,7 +7,7 @@ class Guard():
         self.minutes = minutes
 
 #setting up my file for day 4 if i every get there lol
-with open('day4p1-curtis-input.txt') as infile:
+with open('example-input.txt') as infile:
     data = infile.read().splitlines()
 
 newdata =[]
