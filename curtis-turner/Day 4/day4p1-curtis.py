@@ -1,36 +1,33 @@
 import datetime
-import re
 
-class Guard():
-    def __init__(self, id, minutes):
-        self.id = id
-        self.minutes = minutes
+charsToStrip = '[]'
 
 #setting up my file for day 4 if i every get there lol
 with open('day4p1-curtis-input.txt') as infile:
-    data = infile.read().splitlines()
+    data = [''.join(c for c in x if c not in charsToStrip) for x in infile.read().splitlines()]
 
-newdata =[]
-for i in range(len(data)):
-    temp = ''
-    string = data[i]
-    timestamp = string.split(' ')[0] + ' ' + string.split(' ')[1]
-    timestamp = timestamp[1:-1]
-    timestap = datetime.datetime.strptime(timestamp, '%Y-%m-%d %H:%M')
-    temp += timestamp + ' ' + data[i]
-    newdata.append(temp)
+data.sort(key = lambda x : x.split(' ')[0] + ' ' + x.split(' ')[1])
 
-#print(newdata[0])
+gaurds = []
 
-newdata.sort(key = lambda x : x.split(' ')[0] + ' ' + x.split(' ')[1])
+def countTimeAsleep(id, d):
+    for i in range(len(d)):
+        if id in d[i]:
+            print(d[i])
 
-with open('check-data-2.txt', 'w') as outfile:
-    for i in newdata:
-        outfile.write(i + '\n')
+for i in data:
+    if 'Guard' in i:
+        gaurdID = i.split(' ')[3]
+        if any(gaurd for gaurd in gaurds if gaurd['id'] == gaurdID):
+            gaurd = next(gaurd for gaurd in gaurds if gaurd['id'] == gaurdID)
+        else:
+            gaurd = {'date': i.split(' ')[0] + ' ' + i.split(' ')[1], 'id': gaurdID, 'asleep': 0}
+            gaurds.append(gaurd)
 
-#print(newdata)
+'''
+print(newdata)
 
-'''gaurds = [{'date': '11-01', 'id': '#123' , 'minutes': 0}]
+gaurds = [{'date': '11-01', 'id': '#123' , 'minutes': 0}]
 
 def countOfMinutesAwake(id, data):
     totalMinutesAwake = 0
@@ -59,5 +56,22 @@ Notes in the Comment
 addtime = map(lambda l : l[0].split(' ')[0] + ' ' + l[0].split(' ')[1], data)
 print(list(addtime))
 print(data[0])
+
+
+newdata =[]
+for i in range(len(data)):
+    temp = ''
+    string = data[i]
+    timestamp = string.split(' ')[0] + ' ' + string.split(' ')[1]
+    timestamp = timestamp[1:-1]
+    timestap = datetime.datetime.strptime(timestamp, '%Y-%m-%d %H:%M')
+    temp += timestamp + ' ' + data[i]
+    newdata.append(temp)
+
+#print(newdata[0])
+
+with open('check-data-3.txt', 'w') as outfile:
+    for i in data:
+        outfile.write(i + '\n')
 '''
 
