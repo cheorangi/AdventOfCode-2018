@@ -1,6 +1,6 @@
 #getting started on day 3 this one is gonna be a doozy
-from math import sqrt
-import re
+#from math import sqrt
+#import re
 
 #claims = ['#1 @ 1,3: 4x4', '#2 @ 3,1: 4x4', '#3 @ 5,5: 2x2']
 with open('day3p1-curtis-input.txt') as infile:
