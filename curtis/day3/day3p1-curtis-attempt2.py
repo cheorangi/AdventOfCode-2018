@@ -9,8 +9,6 @@ with open('day3p1-curtis-input.txt') as infile:
         r = re.split('[^0-9]+', r[1:].strip())
         claims.append([int(d) for d in r])'''
 
-print(claims[0])
-
 cleanedClaims = []
 
 for i in claims:
@@ -22,9 +20,6 @@ for i in claims:
     height = temp[3].split('x')[1]
     result = ID + ' ' +  x  + ' ' + y + ' ' + width + ' ' + height
     cleanedClaims.append(result.split(' '))
-
-print(cleanedClaims)
-
 
 def createMatrix(c):
     matrix = []
