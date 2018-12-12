@@ -35,16 +35,16 @@ def checkOverlap(m1, m2):
     count = 0
     if len(m1) <= len(m2):
         for i in range(len(m1)):
-            r1 = m1[i]
-            r2 = m2[i]
-            temp = r1.intersection(r2)
-            count += len(temp)
+            for j in range(len(m1)):
+                r1 = m1[i]
+                r2 = m2[j]
+                count += len(r1.intersection(r2))
     else:
         for i in range(len(m2)):
-            r1 = m2[i]
-            r2 = m1[i]
-            temp = r1.intersection(r2)
-            count += len(temp)
+            for j in range(len(m2)):
+                r1 = m2[i]
+                r2 = m1[j]
+                count += len(r1.intersection(r2))
     
     return count
 
