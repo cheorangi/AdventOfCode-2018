@@ -21,7 +21,7 @@ for i in claims:
     result = ID + ' ' +  x  + ' ' + y + ' ' + width + ' ' + height
     cleanedClaims.append(result.split(' '))
 
-#convert to use sets instead
+#convert to use sets instead of lists
 def createMatrix(c):
     matrix = []
     for y in range(int(c[2]), int(c[2]) + int(c[4])):
