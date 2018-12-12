@@ -2,10 +2,10 @@
 from math import sqrt
 import re
 
-claims = ['#1 @ 1,3: 4x4', '#2 @ 3,1: 4x4', '#3 @ 5,5: 2x2']
-'''with open('day3p1-curtis-input.txt') as infile:
+#claims = ['#1 @ 1,3: 4x4', '#2 @ 3,1: 4x4', '#3 @ 5,5: 2x2']
+with open('day3p1-curtis-input.txt') as infile:
     claims = infile.read().splitlines()
-    for r in infile.readlines():
+    '''for r in infile.readlines():
         r = re.split('[^0-9]+', r[1:].strip())
         claims.append([int(d) for d in r])'''
 
@@ -42,16 +42,13 @@ def checkOverlap(m1, m2):
 
 overlap = 0
 
+print(len(cleanedClaims))
+
 for i in range(len(cleanedClaims)):
     m1 = createMatrix(cleanedClaims[i])
     for j in range(i+1, len(cleanedClaims)):
-        print('Matrix ' + str(i))
-        print(m1)
         m2 = createMatrix(cleanedClaims[j])
-        print('Matrix ' + str(j))
-        print(m2)
         overlap += checkOverlap(m1, m2)
-
 
 print(overlap)
 '''
