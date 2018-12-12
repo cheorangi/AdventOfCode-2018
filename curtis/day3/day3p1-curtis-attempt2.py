@@ -2,10 +2,10 @@
 from math import sqrt
 import re
 
-#claims = ['#1 @ 1,3: 4x4', '#2 @ 3,1: 4x4', '#3 @ 5,5: 2x2']
-with open('day3p1-curtis-input.txt') as infile:
+claims = ['#1 @ 1,3: 4x4', '#2 @ 3,1: 4x4', '#3 @ 5,5: 2x2']
+'''with open('day3p1-curtis-input.txt') as infile:
     claims = infile.read().splitlines()
-    '''for r in infile.readlines():
+    for r in infile.readlines():
         r = re.split('[^0-9]+', r[1:].strip())
         claims.append([int(d) for d in r])'''
 
@@ -21,34 +21,35 @@ for i in claims:
     result = ID + ' ' +  x  + ' ' + y + ' ' + width + ' ' + height
     cleanedClaims.append(result.split(' '))
 
+#convert to use sets instead
 def createMatrix(c):
     matrix = []
     for y in range(int(c[2]), int(c[2]) + int(c[4])):
-        row = []
+        row = set()
         for x in range(int(c[1]), int(c[1]) +int(c[3])):
-            row.append((x, y))
+            row.add((x, y))
         matrix.append(row)
     return matrix
 
 def checkOverlap(m1, m2):
     count = 0
-    for i in m1:
-        for j in i:
-            for k in m2:
-                if j in k:
-                    count += 1
+    for r1 in m1:
+        for r2 in m2:
+            temp = r1.intersection(r2)
+            count += len(temp)
     
     return count
 
 overlap = 0
 
 for i in range(len(cleanedClaims)):
-    #print('checking claim: ' + cleanedClaims[i][0])
-    #print(cleanedClaims[i])
     m1 = createMatrix(cleanedClaims[i])
     for j in range(i+1, len(cleanedClaims)):
-        #print(cleanedClaims[j])
+        print('Matrix ' + str(i))
+        print(m1)
         m2 = createMatrix(cleanedClaims[j])
+        print('Matrix ' + str(j))
+        print(m2)
         overlap += checkOverlap(m1, m2)
 
 
