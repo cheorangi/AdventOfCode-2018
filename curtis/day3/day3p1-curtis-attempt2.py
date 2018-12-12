@@ -4,15 +4,16 @@ import re
 
 #claims = ['#1 @ 1,3: 4x4', '#2 @ 3,1: 4x4', '#3 @ 5,5: 2x2']
 with open('day3p1-curtis-input.txt') as infile:
-    claims = []
-    for r in infile.readlines():
+    claims = infile.read().splitlines()
+    '''for r in infile.readlines():
         r = re.split('[^0-9]+', r[1:].strip())
-        claims.append([int(d) for d in r])
+        claims.append([int(d) for d in r])'''
 
+print(claims[0])
 
 cleanedClaims = []
 
-'''for i in claims:
+for i in claims:
     temp = i.split(' ')
     ID = temp[0][1:]
     x = temp[2].split(',')[0]
@@ -23,7 +24,7 @@ cleanedClaims = []
     cleanedClaims.append(result.split(' '))
 
 print(cleanedClaims)
-'''
+
 
 def createMatrix(c):
     matrix = []
@@ -46,13 +47,13 @@ def checkOverlap(m1, m2):
 
 overlap = 0
 
-for i in range(len(claims)):
+for i in range(len(cleanedClaims)):
     #print('checking claim: ' + cleanedClaims[i][0])
     #print(cleanedClaims[i])
-    m1 = createMatrix(claims[i])
-    for j in range(i+1, len(claims)):
+    m1 = createMatrix(cleanedClaims[i])
+    for j in range(i+1, len(cleanedClaims)):
         #print(cleanedClaims[j])
-        m2 = createMatrix(claims[j])
+        m2 = createMatrix(cleanedClaims[j])
         overlap += checkOverlap(m1, m2)
 
 
