@@ -33,8 +33,16 @@ def createMatrix(c):
 
 def checkOverlap(m1, m2):
     count = 0
-    for r1 in m1:
-        for r2 in m2:
+    if len(m1) < len(m2):
+        for i in range(len(m1)):
+            r1 = m1[i]
+            r2 = m2[i]
+            temp = r1.intersection(r2)
+            count += len(temp)
+    else:
+        for i in range(len(m2)):
+            r1 = m2[i]
+            r2 = m1[i]
             temp = r1.intersection(r2)
             count += len(temp)
     
