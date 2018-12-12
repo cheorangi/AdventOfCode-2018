@@ -21,36 +21,42 @@ for i in claims:
     result = ID + ' ' +  x  + ' ' + y + ' ' + width + ' ' + height
     cleanedClaims.append(result.split(' '))
 
+#convert to use sets instead
 def createMatrix(c):
     matrix = []
     for y in range(int(c[2]), int(c[2]) + int(c[4])):
-        row = []
+        row = set()
         for x in range(int(c[1]), int(c[1]) +int(c[3])):
-            row.append((x, y))
+            row.add((x, y))
         matrix.append(row)
     return matrix
 
 def checkOverlap(m1, m2):
     count = 0
-    for i in m1:
-        for j in i:
-            for k in m2:
-                if j in k:
-                    count += 1
+    if len(m1) <= len(m2):
+        for i in range(len(m1)):
+            for j in range(len(m1)):
+                r1 = m1[i]
+                r2 = m2[j]
+                count += len(r1.intersection(r2))
+    else:
+        for i in range(len(m2)):
+            for j in range(len(m2)):
+                r1 = m2[i]
+                r2 = m1[j]
+                count += len(r1.intersection(r2))
     
     return count
 
 overlap = 0
 
+print(len(cleanedClaims))
+
 for i in range(len(cleanedClaims)):
-    #print('checking claim: ' + cleanedClaims[i][0])
-    #print(cleanedClaims[i])
     m1 = createMatrix(cleanedClaims[i])
     for j in range(i+1, len(cleanedClaims)):
-        #print(cleanedClaims[j])
         m2 = createMatrix(cleanedClaims[j])
         overlap += checkOverlap(m1, m2)
-
 
 print(overlap)
 '''
