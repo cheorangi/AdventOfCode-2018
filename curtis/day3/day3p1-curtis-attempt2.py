@@ -1,4 +1,10 @@
+<<<<<<< HEAD
 #read data from file or supply test input to list of claims
+=======
+#getting started on day 3 this one is gonna be a doozy
+#from math import sqrt
+#import re
+>>>>>>> ff889ba59894ec454ce74efd29d236be75f25973
 
 #claims = ['#1 @ 1,3: 4x4', '#2 @ 3,1: 4x4', '#3 @ 5,5: 2x2']
 with open('day3p1-curtis-input.txt') as infile:
@@ -16,7 +22,7 @@ for i in claims:
     result = ID + ' ' +  x  + ' ' + y + ' ' + width + ' ' + height
     cleanedClaims.append(result.split(' '))
 
-#convert to use sets instead
+#convert to use sets instead of lists
 def createMatrix(c):
     matrix = []
     for y in range(int(c[2]), int(c[2]) + int(c[4])):
