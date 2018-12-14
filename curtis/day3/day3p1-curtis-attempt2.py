@@ -1,31 +1,45 @@
+from collections import namedtuple
 #read data from file or supply test input to list of claims
 
-fabric = [[0 for i in range(1000)]for j in range(1000)]
+#fabric = [[0 for i in range(1000)]for j in range(1000)]
 
-claims = ["#1 @ 10,30: 40x40", "#2 @ 30,10: 40x40", "#3 @ 50,50: 20x20"]
-'''with open('day3p1-curtis-input.txt') as infile:
-    claims = infile.read().splitlines()'''
+#claims = ["#1 @ 10,30: 40x40", "#2 @ 30,10: 40x40", "#3 @ 50,50: 20x20"]
+with open('day3p1-curtis-input.txt') as infile:
+    claims = infile.read().splitlines()
 
-cleanedClaims = []
+overlap = 0
+fabric = dict()
 
 for i in claims:
     temp = i.split(' ')
     ID = temp[0][1:]
     x = temp[2].split(',')[0]
     y = temp[2].split(',')[1][:-1]
-    width = temp[3].split('x')[0]
-    height = temp[3].split('x')[1]
-    result = ID + ' ' +  x  + ' ' + y + ' ' + width + ' ' + height
-    cleanedClaims.append(result.split(' '))
+    w = temp[3].split('x')[0]
+    h = temp[3].split('x')[1]
 
-usedfabric = set()
+    for i in range(int(x), int(x) + int(w)):
+        for j in range(int(y), int(y) + int(h)):
+            if i < 1001 and j < 1001:
+                temp = (i,j)
+                if fabric.get(temp) == None:
+                    fabric[temp] = 'X'
+                elif fabric.get(temp) == 'X':
+                    overlap += 1
+                
+                
 
-def markFabric(c):
-    overlap = 0
-    for y in range(int(c[2]), int(c[2]) + int(c[4])):
-        for x in range(int(c[1]), int(c[1]) +int(c[3])):
-            if (x,y) not in usedfabric:
-                usedfabric.add((x,y))
+print(overlap)
+
+'''
+def markFabric(c):    
+    for i in range(int(c[3])):
+        for j in range(int(c[4])):
+            x = int(c[1]) + i
+            y = int(c[2]) + j
+            temp = (x,y)
+            if temp not in fabric:
+                fabric.add((x,y))
             else:
                 overlap += 1
     return overlap
@@ -48,7 +62,6 @@ for i in cleanedClaims:
     totalOverlap += markFabric(i)
 
 
-'''
 #convert to use sets instead of lists
 def createMatrix(c):
     matrix = []
@@ -87,6 +100,7 @@ for i in range(len(cleanedClaims)):
     for j in range(i+1, len(cleanedClaims)):
         m2 = createMatrix(cleanedClaims[j])
         test += checkOverlap(m1, m2)
-'''
 
 print(totalOverlap)
+
+'''
