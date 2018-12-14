@@ -1,30 +1,52 @@
-import datetime
-
+from itertools import takewhile
+#chars to remove from string
 charsToStrip = '[]'
 
 #setting up my file for day 4 if i every get there lol
 with open('day4p1-curtis-input.txt') as infile:
     data = [''.join(c for c in x if c not in charsToStrip) for x in infile.read().splitlines()]
 
+#sort data by time inlcuding hour and minute
 data.sort(key = lambda x : x.split(' ')[0] + ' ' + x.split(' ')[1])
 
-gaurds = []
+#create dictionary to store gaurds times asleep. Format with be like this - {id: timeasleep}
+guards = dict()
 
 def countTimeAsleep(id, d):
     for i in range(len(d)):
         if id in d[i]:
             print(d[i])
 
+takewh
+
+#create gaurd id in dictionary with initial value of zero
 for i in data:
+    startMinute = 0
+    endMinute = 0
     if 'Guard' in i:
-        gaurdID = i.split(' ')[3]
-        if any(gaurd for gaurd in gaurds if gaurd['id'] == gaurdID):
+        ID = i.split(' ')[3][1:]
+        if guards.get(ID) == None:
+            guards[ID] = 0
+
+    if 'asleep' in i:
+        startMinute = i.split(' ')[1].split(':')[1]
+
+    if 'wakes' in i:
+        endMinute = i.split(' ')[1].split(':')[1]
+
+    if startMinute != 0 and endMinute != 0:
+        timeAsleep = endMinute - startMinute
+        guards[ID] += timeAsleep
+
+print(guards['3167'])
+        
+'''
+if any(gaurd for gaurd in gaurds if gaurd['id'] == gaurdID):
             gaurd = next(gaurd for gaurd in gaurds if gaurd['id'] == gaurdID)
         else:
             gaurd = {'date': i.split(' ')[0] + ' ' + i.split(' ')[1], 'id': gaurdID, 'asleep': 0}
             gaurds.append(gaurd)
 
-'''
 print(newdata)
 
 gaurds = [{'date': '11-01', 'id': '#123' , 'minutes': 0}]
