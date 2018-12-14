@@ -1,13 +1,8 @@
-#getting started on day 3 this one is gonna be a doozy
-from math import sqrt
-import re
+#read data from file or supply test input to list of claims
 
 #claims = ['#1 @ 1,3: 4x4', '#2 @ 3,1: 4x4', '#3 @ 5,5: 2x2']
 with open('day3p1-curtis-input.txt') as infile:
     claims = infile.read().splitlines()
-    '''for r in infile.readlines():
-        r = re.split('[^0-9]+', r[1:].strip())
-        claims.append([int(d) for d in r])'''
 
 cleanedClaims = []
 
@@ -35,22 +30,20 @@ def checkOverlap(m1, m2):
     count = 0
     if len(m1) <= len(m2):
         for i in range(len(m1)):
-            for j in range(len(m1)):
-                r1 = m1[i]
+            r1 = m1[i]
+            for j in range(len(m2)):
                 r2 = m2[j]
                 count += len(r1.intersection(r2))
     else:
         for i in range(len(m2)):
-            for j in range(len(m2)):
-                r1 = m2[i]
+            r1 = m2[i]
+            for j in range(len(m1)):
                 r2 = m1[j]
                 count += len(r1.intersection(r2))
     
     return count
 
 overlap = 0
-
-print(len(cleanedClaims))
 
 for i in range(len(cleanedClaims)):
     m1 = createMatrix(cleanedClaims[i])
@@ -59,8 +52,3 @@ for i in range(len(cleanedClaims)):
         overlap += checkOverlap(m1, m2)
 
 print(overlap)
-'''
-for i in range(len(claimsMatrices)):
-    for j in range(i+1, len(claimsMatrices)):
-       overlap += checkOverlap(claimsMatrices[i], claimsMatrices[j])
-'''
