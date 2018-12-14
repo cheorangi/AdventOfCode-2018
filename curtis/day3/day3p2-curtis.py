@@ -6,7 +6,7 @@ fabric = [['0' for i in range(1000)]for j in range(1000)]
 with open('day3p1-curtis-input.txt') as infile:
     claims = infile.read().splitlines()
 
-#area of overlapping fabric
+#spot is already taken by an ID
 overlappingIDs = []
 
 for i in claims:
@@ -16,9 +16,6 @@ for i in claims:
     y = int(temp[2].split(',')[1][:-1])
     width = int(temp[3].split('x')[0])
     height = int(temp[3].split('x')[1])
-
-    #print statement for debugging
-    #print('x: ' + str(x) + ', y: ' + str(y) + ', width: ' + str(width) + ', height: ' + str(height))
 
     for i in range(width):
         for j in range(height):
@@ -35,4 +32,3 @@ for i in claims:
 
     if ID not in overlappingIDs:
         print(ID)
-        
