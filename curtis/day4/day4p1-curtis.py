@@ -18,23 +18,26 @@ def countTimeAsleep(id, d):
             print(d[i])
 
 #create gaurd id in dictionary with initial value of zero
-for i in data:
+for i in range(len(data)):
     startMinute = 0
     endMinute = 0
-    if 'Guard' in i:
-        ID = i.split(' ')[3][1:]
+    if 'Guard' in data[i]:
+        ID = data[i].split(' ')[3][1:]
         if guards.get(ID) == None:
             guards[ID] = 0
 
-    if 'asleep' in i:
-        startMinute = i.split(' ')[1].split(':')[1]
+        onDuty = True
+        j = i + 1
+        while onDuty:
+            if 'asleep' in data[j]:
+                startMinute = i.split(' ')[1].split(':')[1]
 
-    if 'wakes' in i:
-        endMinute = i.split(' ')[1].split(':')[1]
+            if 'wakes' in data[j]:
+                endMinute = i.split(' ')[1].split(':')[1]
 
-    if startMinute != 0 and endMinute != 0:
-        timeAsleep = endMinute - startMinute
-        guards[ID] += timeAsleep
+            if startMinute != 0 and endMinute != 0:
+                timeAsleep = endMinute - startMinute
+                guards[ID] += timeAsleep
 
 print(guards['3167'])
         
