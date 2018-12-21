@@ -1,4 +1,5 @@
-from itertools import takewhile
+import operator
+
 #chars to remove from string
 charsToStrip = '[]'
 
@@ -10,37 +11,49 @@ with open('day4p1-curtis-input.txt') as infile:
 data.sort(key = lambda x : x.split(' ')[0] + ' ' + x.split(' ')[1])
 
 #create dictionary to store gaurds times asleep. Format with be like this - {id: timeasleep}
-guards = dict()
+guards = {}
 
-def countTimeAsleep(id, d):
-    for i in range(len(d)):
-        if id in d[i]:
-            print(d[i])
+start = 0
+end = 0
 
 #create gaurd id in dictionary with initial value of zero
 for i in range(len(data)):
-    startMinute = 0
-    endMinute = 0
     if 'Guard' in data[i]:
+        date = data[i].split(' ')[0]
         ID = data[i].split(' ')[3][1:]
-        if guards.get(ID) == None:
-            guards[ID] = 0
+        start = 0
+        end = 0
 
-        onDuty = True
-        j = i + 1
-        while onDuty:
-            if 'asleep' in data[j]:
-                startMinute = i.split(' ')[1].split(':')[1]
+    if 'asleep' in data[i]:
+        start = data[i].split(' ')[1].split(':')[1]
 
-            if 'wakes' in data[j]:
-                endMinute = i.split(' ')[1].split(':')[1]
+    if 'wakes' in data[i]:
+        end = data[i].split(' ')[1].split(':')[1]
 
-            if startMinute != 0 and endMinute != 0:
-                timeAsleep = endMinute - startMinute
-                guards[ID] += timeAsleep
-
-print(guards['3167'])
+    if start != 0 and end != 0:
+        timeAsleep = int(end) - int(start)
+        if date in guards.keys():
+            if ID in guards[date].keys():
+                guards[date][ID] += [i for i in range(int(start), int(end))]
+                #timeAsleep
+        else:
+            guards[date] = {ID:[i for i in range(int(start), int(end))]}#timeAsleep
+        start = 0
+        end = 0
         
+
+d = max(guards.keys(), key=(lambda key: guards[key]))
+
+print(guards[d])
+m = 0
+for i in guards.keys():
+    for j in guards[i].keys():
+        #print(len(guards[i][j]))
+        if len(guards[i][j]) > m:
+            m = len(guards[i][j])
+
+print(m)
+
 '''
 if any(gaurd for gaurd in gaurds if gaurd['id'] == gaurdID):
             gaurd = next(gaurd for gaurd in gaurds if gaurd['id'] == gaurdID)
