@@ -17,8 +17,6 @@ def countTimeAsleep(id, d):
         if id in d[i]:
             print(d[i])
 
-takewh
-
 #create gaurd id in dictionary with initial value of zero
 for i in data:
     startMinute = 0
