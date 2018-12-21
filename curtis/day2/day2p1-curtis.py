@@ -26,9 +26,6 @@ for id in ids:
             threes += 1
             break
 
-print(str(twos))
-print(str(threes))
-
 checksum = twos * threes
 
 print(checksum)
