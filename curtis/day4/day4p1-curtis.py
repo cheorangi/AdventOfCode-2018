@@ -1,5 +1,3 @@
-import operator
-
 #chars to remove from string
 charsToStrip = '[]'
 
