@@ -1,3 +1,4 @@
+from collections import Counter
 #chars to remove from string
 charsToStrip = '[]'
 
@@ -11,14 +12,19 @@ data.sort(key = lambda x : x.split(' ')[0] + ' ' + x.split(' ')[1])
 #create dictionary to store gaurds times asleep. Format with be like this - {id: timeasleep}
 guards = {}
 
+#initialize start and end to avoid unset error in loop below
 start = 0
 end = 0
 
-#create gaurd id in dictionary with initial value of zero
+#create dictionary with guard id as the key and nest dictionnary with the dates and a list containing the minutes sleep on that date.
 for i in range(len(data)):
     if 'Guard' in data[i]:
         date = data[i].split(' ')[0]
         ID = data[i].split(' ')[3][1:]
+        if ID not in guards.keys():
+            guards[ID] = {date:[]}
+        else:
+            guards[ID][date] = []
         start = 0
         end = 0
 
@@ -29,30 +35,51 @@ for i in range(len(data)):
         end = data[i].split(' ')[1].split(':')[1]
 
     if start != 0 and end != 0:
-        timeAsleep = int(end) - int(start)
-        if date in guards.keys():
-            if ID in guards[date].keys():
-                guards[date][ID] += [i for i in range(int(start), int(end))]
-                #timeAsleep
+        if ID in guards.keys():
+            if date in guards[ID].keys():
+                for i in range(int(start), int(end)):
+                    guards[ID][date].append(i)
         else:
-            guards[date] = {ID:[i for i in range(int(start), int(end))]}#timeAsleep
+            guards[ID][date] = [i for i in range(int(start), int(end))]#timeAsleep
         start = 0
         end = 0
         
 
 d = max(guards.keys(), key=(lambda key: guards[key]))
 
-print(guards[d])
+g = ''
 m = 0
+#get the guard ID
 for i in guards.keys():
+    #get the dates for that guard and check the length of the list containing the minutes they were asleep.
     for j in guards[i].keys():
-        #print(len(guards[i][j]))
-        if len(guards[i][j]) > m:
+        print(guards[i][j])
+        if len(guards[i][j]) >= m:
+            g = i
             m = len(guards[i][j])
 
-print(m)
+print('guard: {}, minutes asleep: {}'.format(g, m))
+
+minuteCounts = {}
+
+for d in guards[g]:
+    for i in guards[g][d]:
+        if i not in  minuteCounts:
+            minuteCounts[i] = 1
+        else:
+            minuteCounts[i] += 1
+
+k = max(minuteCounts.keys(), key=(lambda key: minuteCounts[key]))
+print('Minute Most Asleep: {}'.format(k))
+#print(minuteCounts[k])
+answer = int(g) * int(k)
+print('Answers = {}'.format(str(answer)))
+
+
+    
 
 '''
+
 if any(gaurd for gaurd in gaurds if gaurd['id'] == gaurdID):
             gaurd = next(gaurd for gaurd in gaurds if gaurd['id'] == gaurdID)
         else:
