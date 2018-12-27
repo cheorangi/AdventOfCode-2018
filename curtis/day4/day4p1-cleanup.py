@@ -54,7 +54,7 @@ for i in guards.keys():
             g = i
             m = len(guards[i][j])
 
-print('guard: {}, minutes asleep: {}'.format(g, m))
+#print('guard: {}, minutes asleep: {}'.format(g, m))
 
 minuteCounts = {}
 
@@ -68,29 +68,27 @@ for d in guards[g]:
             minuteCounts[i] += 1
 
 k = max(minuteCounts.keys(), key=(lambda key: minuteCounts[key]))
-print('Minute Asleep the Most: {}'.format(k))
-answer = int(g) * int(k)
-print('Answers = {}'.format(str(answer)))
+#print('Minute Asleep the Most: {}'.format(k))
+
+print('Answers Part 1: {}'.format(str(int(g) * int(k))))
 
 #part 2
 newGuards = {}
 for g in guards:
-    minutes = {}
     for d in guards[g]:
-        for minute in guards[g][d]:
-            if minute not in minutes:
-                minutes[minute] = 1 
+        for m in guards[g][d]:
+            if (g, m) not in newGuards:
+                newGuards[(g, m)] = 1
             else:
-                minutes[minute] += 1
-    newGuards[g] = minutes
+                newGuards[(g, m)] += 1
 
-mostFreq = 0
-guard = ''
+#print(newGuards)
 
-for i in newGuards:
-    for m in newGuards[i]:
-        if newGuards[i][m] > mostFreq:
-            mostFreq = m
-            guard = g
+guard = None
+for k, v in newGuards.items():
+    if guard is None or v > newGuards[guard]:
+        guard = k
 
-print('guard: {}, most frequent minute asleep: {}'.format(guard, mostFreq))
+print('Answer Part 2: {}'.format(int(guard[0]) * int(guard[1])))
+
+#print('guard: {}, most frequent minute asleep: {}'.format(guard))

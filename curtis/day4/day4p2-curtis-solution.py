@@ -24,6 +24,9 @@ for line in lines:
                 CM[(guard, t)] += 1
                 C[guard] += 1
 
+print(CM)
+print(C)
+
 def argmax(d):
     best = None
     for k,v in d.items():
