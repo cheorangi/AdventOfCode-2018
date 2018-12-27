@@ -45,7 +45,7 @@ for i in range(len(data)):
         end = 0
         
 
-d = max(guards.keys(), key=(lambda key: guards[key]))
+#d = max(guards.keys(), key=(lambda key: guards[key]))
 
 g = ''
 m = 0
@@ -53,7 +53,7 @@ m = 0
 for i in guards.keys():
     #get the dates for that guard and check the length of the list containing the minutes they were asleep.
     for j in guards[i].keys():
-        print(guards[i][j])
+        #find guard with the most minutes asleep
         if len(guards[i][j]) >= m:
             g = i
             m = len(guards[i][j])
@@ -61,6 +61,8 @@ for i in guards.keys():
 print('guard: {}, minutes asleep: {}'.format(g, m))
 
 minuteCounts = {}
+
+guardsMinutes = {}
 
 for d in guards[g]:
     for i in guards[g][d]:
@@ -70,10 +72,31 @@ for d in guards[g]:
             minuteCounts[i] += 1
 
 k = max(minuteCounts.keys(), key=(lambda key: minuteCounts[key]))
-print('Minute Most Asleep: {}'.format(k))
-#print(minuteCounts[k])
+print('Minute Asleep the Most: {}'.format(k))
 answer = int(g) * int(k)
 print('Answers = {}'.format(str(answer)))
+
+#part 2
+minuteCount = {}
+guardCounts = {}
+for g in guards:
+    for d in guards[g]:
+        for minute in guards[g][d]:
+            if minute not in minuteCount:
+                minuteCount[minute] = 1
+            else:
+                minuteCount[minute] += 1
+    guardCounts[g] = minuteCount
+
+#print(guardCounts)
+
+frequency = max(guardCounts.keys(), key=(lambda key: guardCounts[key]))
+print(frequency)
+print(max(guardCounts[frequency]))
+
+
+    
+
 
 
     
