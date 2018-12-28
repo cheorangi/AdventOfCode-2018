@@ -1,1 +1,0 @@
-print(len(open('answer.txt').read()))

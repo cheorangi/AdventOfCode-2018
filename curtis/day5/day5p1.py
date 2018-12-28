@@ -8,7 +8,7 @@ def removePairs(s):
     for i in range(len(s)-1):
         c1 = s[i]
         c2 = s[i+1]
-        if c1 == c2.lower() or c1.lower() == c2:
+        if c1 == c2.lower() or c1.lower() == c2 or c1 == c2.upper() or c1.upper() == c2:
             temp = s[:i] + s[i+2:]
             return temp
     if temp == None:
@@ -22,4 +22,4 @@ while cont:
     else:
         currString = removePairs(currString)
 
-print(currString)
+print('Answer Part 1: {}'.format(len(currString)))
