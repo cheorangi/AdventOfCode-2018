@@ -1,7 +1,7 @@
 #chars to remove from string
 charsToStrip = '[]'
 
-#setting up my file for day 4 if i every get there lol
+#parse file and format date properly
 with open('day4p1-curtis-input.txt') as infile:
     data = [''.join(c for c in x if c not in charsToStrip) for x in infile.read().splitlines()]
 
@@ -43,7 +43,7 @@ for i in range(len(data)):
         start = 0
         end = 0
         
-g = ''
+guardID = None
 m = 0
 #get the guard ID
 for i in guards.keys():
@@ -51,26 +51,22 @@ for i in guards.keys():
     for j in guards[i].keys():
         #find guard with the most minutes asleep
         if len(guards[i][j]) >= m:
-            g = i
+            guardID = i
             m = len(guards[i][j])
 
-#print('guard: {}, minutes asleep: {}'.format(g, m))
 
 minuteCounts = {}
 
-guardsMinutes = {}
-
-for d in guards[g]:
-    for i in guards[g][d]:
+for d in guards[guardID]:
+    for i in guards[guardID][d]:
         if i not in  minuteCounts:
             minuteCounts[i] = 1
         else:
             minuteCounts[i] += 1
 
-k = max(minuteCounts.keys(), key=(lambda key: minuteCounts[key]))
-#print('Minute Asleep the Most: {}'.format(k))
+minute = max(minuteCounts.keys(), key=(lambda key: minuteCounts[key]))
 
-print('Answers Part 1: {}'.format(str(int(g) * int(k))))
+print('Answers Part 1: {}'.format(str(int(guardID) * int(minute))))
 
 #part 2
 newGuards = {}
@@ -82,13 +78,9 @@ for g in guards:
             else:
                 newGuards[(g, m)] += 1
 
-#print(newGuards)
-
 guard = None
 for k, v in newGuards.items():
     if guard is None or v > newGuards[guard]:
         guard = k
 
 print('Answer Part 2: {}'.format(int(guard[0]) * int(guard[1])))
-
-#print('guard: {}, most frequent minute asleep: {}'.format(guard))
